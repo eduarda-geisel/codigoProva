@@ -427,8 +427,107 @@
 
     // Escreva seu código aqui ↓
 
-    const loginUser = document.elementById(login-usuario)
-    const loginSenha = document.elementById(login-senha)
+    function exibirFeedback(idElemento, tipoMensagem, textoMensagem) {
+    const feedback = document.getElementById(idElemento);
+
+    feedback.style.display = "block";
+
+    feedback.className = "feedback " + tipoMensagem;
+
+    feedback.textContent = textoMensagem;
+}
+
+document.getElementById("form-login").addEventListener("submit", evento => {
+
+    evento.preventDefault();
+
+    const campoUsuario = document.getElementById("login-usuario");
+
+    const campoSenha = document.getElementById("login-senha");
+
+    const usuarioDigitado = campoUsuario.value;
+
+    const senhaDigitada = campoSenha.value;
+
+    const usuarioCorreto = usuarioDigitado === usuarioFixo;
+
+    const senhaCorreta = senhaDigitada === senhaFixa;
+
+    const loginPermitido = usuarioCorreto && senhaCorreta;
+
+    if (loginPermitido) {
+
+        exibirFeedback(
+            "feedback-login",
+            "sucesso",
+            "Login realizado com sucesso!"
+        );
+
+    } else {
+
+        exibirFeedback(
+            "feedback-login",
+            "erro",
+            "Usuário ou senha inválidos."
+        );
+
+    }
+
+});
+
+document.getElementById("form-cadastro").addEventListener("submit", evento => {
+
+    evento.preventDefault();
+
+    const campoEmail = document.getElementById("cad-email");
+
+    const campoSenha = document.getElementById("cad-senha");
+
+    const campoCpf = document.getElementById("cad-cpf");
+
+    const campoNascimento = document.getElementById("cad-nascimento");
+
+    const emailDigitado = campoEmail.value;
+
+    const senhaDigitada = campoSenha.value;
+
+    const cpfDigitado = campoCpf.value;
+
+    const dataNascimento = campoNascimento.value;
+
+    const emailValido = emailDigitado.includes("@");
+
+    const senhaValida = senhaDigitada.length >= 6;
+
+    const cpfValido = cpfDigitado.length === 14;
+
+    const nascimentoValido = dataNascimento !== "";
+
+    const cadastroValido =
+        emailValido &&
+        senhaValida &&
+        cpfValido &&
+        nascimentoValido;
+
+    if (cadastroValido) {
+
+        exibirFeedback(
+            "feedback-cadastro",
+            "sucesso",
+            "Cadastro efetuado com sucesso!"
+        );
+
+    } else {
+
+        exibirFeedback(
+            "feedback-cadastro",
+            "erro",
+            "Verifique os dados informados."
+        );
+
+    }
+
+});
     
 
   </script>
